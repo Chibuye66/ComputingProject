@@ -1,0 +1,292 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Evergreen.master.cs" Inherits="ComputingProject.Evergreen" %>
+
+<!DOCTYPE html>
+
+<html>
+
+<head runat="server">
+    <title></title>
+
+    <!--Bootstrap CSS Link-->
+    <link href="Bootstrap/CSS/bootstrap.min.css" rel="stylesheet" />
+
+    <!--Datatables CSS Link-->
+    
+    <link href="Datatables/CSS/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <!--Datatables JS Link-->
+    <script src="Datatables/Javascript/jquery.dataTables.min.js"></script>
+
+    <!--FontAwesome CSS Link-->
+    <link href="FontAwesome/css/all.css" rel="stylesheet" />
+
+    <!--Footer CSS-->
+    <link href="CSS/FooterCSS.css" rel="stylesheet" />
+
+    <!--Bootstrap JS Link-->
+    <script src="Bootstrap/Javascript/bootstrap.bundle.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    
+    <form id="form1" runat="server">
+
+        <div>
+
+            <!--Navigation Bar icon-->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand">
+                    <a href="Home.aspx">
+                    <img src="Images/Evergreen%20Logo.jpg" width="100" height="100" /></a>
+                    Evergreen Library
+                </a>
+
+                <!--Collapsable Button-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <!--Left links-->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="Home.aspx">Home  </a>
+                        </li>
+
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="NavViewBooks" runat="server" OnClick="NavViewBooks_Click">View Books</asp:LinkButton>
+                        </li>
+                        
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://kabwatabaptistchurch.com">KBC Church Website                                              </a>
+                        </li>
+                    </ul>
+                    <!--Left links-->
+
+
+                    <!--Right Links-->
+                    <ul class="navbar-nav mb-auto">
+
+                        
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="navMemberLogin" runat="server" OnClick="navMemberLogin_Click">Member Login</asp:LinkButton>
+                        </li>
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="NavAdminLogin" runat="server" OnClick="NavAdminLogin_Click">Admin Login</asp:LinkButton>
+                        </li>
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="NavSignUp" runat="server" OnClick="NavSignUp_Click">Register</asp:LinkButton>
+                        </li>
+
+                        
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="NavHelloUser" runat="server" OnClick="NavHelloUser_Click" Visible="False">Hello User</asp:LinkButton>
+                        </li>
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="NavHelloAdmin" runat="server" OnClick="NavHelloAdmin_Click" Visible="False">Hello Admin</asp:LinkButton>
+                        </li>
+
+                        <li class="nav-item active">
+                            <asp:LinkButton class="nav-link" ID="NavLogout" runat="server" OnClick="NavLogout_Click" Visible="False">&nbsp Logout</asp:LinkButton>
+                        </li>
+
+                    </ul>
+                    <!--Right Links-->
+
+                </div>
+
+            </nav>
+
+        </div>
+
+
+        <div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </div>
+
+        <br />
+        <br />
+
+        <footer class="mt-auto">
+
+            <!-- Grid container -->
+            <div class="container p-4">
+
+                <!-- Section: Social media -->
+                <section
+                    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+
+                    <!-- Left -->
+                    <div class="me-5 d-none d-lg-block">
+                        <span>    </span>
+                    </div>
+                    <!-- Left -->
+
+                    <!-- Right -->
+                    <div>
+                        <a href="https://www.facebook.com/pages/category/Library/Evergreen-Christian-Public-Library-191069477749682/" class="me-4 text-reset">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                       
+                        <a href="https://www.google.com/search?q=evergreen+christian+book+store+lusaka&sxsrf=ALiCzsbU6a5G2lpnYv2CH-Fg4VOUIWWnjg%3A1651281025970&ei=gYxsYsLiOojVgQbEq4fQAw&gs_ssp=eJwFwUEOgyAQBdC4beId2Lh20FrEI_QWw_BD1UYiUEN6et97tH3otT6D36T-CzVLR1XbJ83eeGGxgPiF6iAGIxxNL3ZmMPO7w4UUEnAo-aQ1l5UP5WLcVS4xQX1_mXe-AV61Hu8&oq=Evergreen+Ch&gs_lcp=Cgdnd3Mtd2l6EAMYATIECCMQJzILCC4QgAQQxwEQrwEyBQgAEJECMgUIABCABDIFCAAQkQIyCgguEMcBEK8BEEMyBAgAEEMyBAgAEEMyBAgAEEMyBQgAEIAEOgUILhCRAjoICAAQsQMQkQI6CwguEIAEELEDEIMBOggIABCABBCxAzoFCAAQsQM6CwgAEIAEELEDEIMBOgsILhDHARCvARCRAjoICC4QgAQQsQM6DgguEIAEELEDEIMBENQCOgcILhCxAxBDOg0ILhDHARDRAxDUAhBDOgQILhBDOgcIIxCxAhAnOgQILhAKOgQIABAKOgUILhCABDoKCAAQgAQQhwIQFDoICC4QgAQQ1AJKBAhBGAFKBAhGGABQ8HxYxaYBYIq9AWgHcAB4AYAB0gKIAeIokgEGMi02LjExmAEAoAEBwAEB&sclient=gws-wiz" class="me-4 text-reset">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        
+                                              
+                    </div>
+                    <!-- Right -->
+                </section>
+                <!-- Section: Social media -->
+
+                <section>
+                    <!--Grid row-->
+                    <div class="row" id="MiddleFooter">
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                            
+                            <br />
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <asp:LinkButton Visible="False" class="FooterLinks" ID="footerBtnBookInventory" runat="server" OnClick="footerBtnBookInventory_Click">Books</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton Visible="False" class="FooterLinks" ID="footerBtnMembers" runat="server" OnClick="footerBtnMembers_Click">Members</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton  Visible="False" class="FooterLinks" ID="FootBtnAuthor" runat="server" OnClick="FootBtnAuthor_Click">Author Management</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton  Visible="False" class="FooterLinks" ID="FootBtnPublisher" runat="server" OnClick="FootBtnPublisher_Click">Publisher Management</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton  Visible="False" class="FooterLinks" ID="FootBtnCirculation" runat="server" OnClick="FootBtnCirculation_Click">Circulation Management</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                            <h5>Books</h5>
+                            <br />
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="FootBtnCatalogue" runat="server" OnClick="FootBtnCatalogue_Click">Catalogue</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="FootBtnBorrow" runat="server" OnClick="FootBtnBorrow_Click">Borrow Books</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="FootBtnVisitUs" runat="server" OnClick="FootBtnVisitUs_Click">Visit Us</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                
+
+                                
+                                
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                            <h5>Help</h5>
+                            <br />
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="FootBtnFaq" runat="server">FAQ</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="FootBtnUsefulResources" runat="server">Useful Resources</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="FootBtnKBCSite" runat="server" OnClick="FootBtnKBCSite_Click">Kabwata Baptist Church Site</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+
+                                <li>
+                                    <asp:LinkButton class="FooterLinks" ID="adminLoginFoot" runat="server" Visible="true" OnClick="adminLoginFoot_Click">Administrator Login</asp:LinkButton>
+                                    &nbsp;
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                            <h5>Contact Information</h5>
+                            <br />
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <P>Phone: 123456789</P>
+                                </li>
+
+                                <li>
+                                    <p>Email: EvergreenEmail@email.com</p>
+                                </li>
+
+                                <li>
+                                    <p>Location: Kabwata Baptist Church, along Chilimbulu Road, opposite Libala Secondary School.</p>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        
+
+                    </div>
+                    <!--Grid row-->
+                </section>
+            </div>
+            <!-- Grid container -->
+
+
+            <!-- Evergreen Copyright-->
+
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2022 Copyright:   
+                <a class="text-dark" href="google.com">Evergreen Library</a>
+            </div>
+
+        </footer>
+
+    </form>
+</body>
+
+</html>

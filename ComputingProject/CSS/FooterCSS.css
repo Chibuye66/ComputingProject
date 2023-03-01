@@ -1,0 +1,13 @@
+﻿.FooterLinks {
+    color:dimgrey;
+    text-decoration: none !important;
+}
+    .FooterLink:hover {
+        color: black;
+    }
+
+    .WelcomeText{
+        color:dimgrey;
+        text-decoration: none !important;
+    }
+
